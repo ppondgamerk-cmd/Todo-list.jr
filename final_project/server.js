@@ -55,6 +55,13 @@ app.get('/use-lib', (req, res) => {
   res.json({ date: DateLib.to_thai(date) })
 })
 
+app.get('/test-env', (req, res) => {
+  res.json({
+    databaseUrl: process.env.DATABASE_URL ? process.env.DATABASE_URL.replace(/:[^:@]+@/, ':***@') : null,
+    envKeys: Object.keys(process.env)
+  })
+})
+
 // Routes
 app.get('/', (req, res) => {
     res.send('Hello Express');
